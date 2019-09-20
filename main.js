@@ -8,11 +8,11 @@ function render() {
 
 function createCameras() {
     camera_side = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
-    const x = 10, y = -10, z = 15;
+    const x = 10, y = -30, z = 20;
     camera_side.position.x = x
     camera_side.position.y = y
     camera_side.position.z = z
-    camera_side.lookAt(new THREE.Vector3(x, 0, z-5))
+    camera_side.lookAt(new THREE.Vector3(x, 0, z))
     
 }
 
@@ -43,6 +43,38 @@ function createArmBase(x,y,z) {
     return base
 }
 
+function createArm(x,y,z) {
+    var geometry = new THREE.BoxGeometry(1,1,7)
+    var material = new THREE.MeshBasicMaterial({wireframe: true, color: 0xff0000} )
+    var arm = new THREE.Mesh(geometry,material)
+    arm.position.set(x,y,z)
+    return arm
+}
+
+function createArmNode(x,y,z) {
+    var geometry = new THREE.SphereGeometry(1.5,20,20)
+    var material = new THREE.MeshBasicMaterial({wireframe: true, color: 0xffffff})
+    var mesh = new THREE.Mesh(geometry,material)
+    mesh.position.set(x,y,z)
+    return mesh
+}
+
+function createHandBase(x,y,z) {
+    var geometry = new THREE.BoxGeometry(5,5,1)
+    var material = new THREE.MeshBasicMaterial({wireframe: true, color: 0xFFAAFF})
+    var mesh = new THREE.Mesh(geometry,material)
+    mesh.position.set(x,y,z)
+    return mesh
+}
+
+function createFinger(x,y,z) {
+    var geometry = new THREE.BoxGeometry(1,1,3)
+    var material = new THREE.MeshBasicMaterial({wireframe: true, color: 0xFFAABB})
+    var mesh = new THREE.Mesh(geometry,material)
+    mesh.position.set(x,y,z)
+    return mesh
+}
+
 function createScene() {
     scene = new THREE.Scene()
     scene.add(new THREE.AxesHelper(5))
@@ -53,6 +85,13 @@ function createScene() {
     base.add(createWheel(18,21,2))
     base.add(createBase(11.5,14.5,5))
     base.add(createArmBase(11.5,14.5,6))
+    base.add(createArm(11.5,14.5,11.5))
+    base.add(createArmNode(11.5,14.5,16.5))
+    base.add(createArm(11.5,14.5,21.5))
+    base.add(createArmNode(11.5,14.5,26.5))
+    base.add(createHandBase(11.5,14.5,28.5))
+    base.add(createFinger(10,14.5,30.5))
+    base.add(createFinger(13,14.5,30.5))
     scene.add(base)
 }
 
