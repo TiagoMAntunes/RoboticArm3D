@@ -8,11 +8,11 @@ function render() {
 
 function createCameras() {
     camera_side = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
-    const x = 10, y = -10, z = 5;
+    const x = 10, y = -10, z = 15;
     camera_side.position.x = x
     camera_side.position.y = y
     camera_side.position.z = z
-    camera_side.lookAt(new THREE.Vector3(x, 0, z))
+    camera_side.lookAt(new THREE.Vector3(x, 0, z-5))
     
 }
 
@@ -35,6 +35,13 @@ function createBase(x,y,z) {
     return mesh
 }
 
+function createArmBase(x,y,z) {
+    var geometry = new THREE.SphereGeometry(2,20,20, 0, Math.PI)
+    var material = new THREE.MeshBasicMaterial({wireframe: true, color: 0xffff00} )
+    var base = new THREE.Mesh(geometry,material)
+    base.position.set(x,y,z)
+    return base
+}
 
 function createScene() {
     scene = new THREE.Scene()
@@ -45,6 +52,7 @@ function createScene() {
     base.add(createWheel(18,8,2))
     base.add(createWheel(18,21,2))
     base.add(createBase(11.5,14.5,5))
+    base.add(createArmBase(11.5,14.5,6))
     scene.add(base)
 }
 
