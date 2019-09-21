@@ -113,7 +113,8 @@ function createTargetSupport(x, y, z) {
     return mesh
 }
 
-var keysMap = {81: false, 113: false, 87: false, 119: false, 65: false, 97: false, 83: false, 115: false}
+var keysMap = {81: false, 113: false, 87: false, 119: false, 65: false, 97: false, 83: false, 115: false,
+    37: false, 38: false, 39: false, 40: false}
 
 function onKeyDown(e) {
     switch(e.keyCode) {
@@ -139,28 +140,37 @@ function onKeyDown(e) {
     }
 
     if (keysMap[81] || keysMap[113]) { //Q or q
-    angle2Mesh.rotation.y -= 0.015
-    if (angle2Mesh.rotation.y < -90 * Math.PI / 180)
-        angle2Mesh.rotation.y = -90 * Math.PI / 180
+        angle2Mesh.rotation.y -= 0.015
     }
     
     if (keysMap[87] || keysMap[119]) { //W or w
-    angle2Mesh.rotation.y += 0.015
-    if (angle2Mesh.rotation.y > 90 * Math.PI / 180)
-        angle2Mesh.rotation.y = 90 * Math.PI / 180
+        angle2Mesh.rotation.y += 0.015
     }
 
     if (keysMap[65] || keysMap[97]) { //A or a
-    angle2Mesh.rotation.x -= 0.015
-    if (angle2Mesh.rotation.x < -90 * Math.PI / 180)
-        angle2Mesh.rotation.x = -90 * Math.PI / 180
+        angle2Mesh.rotation.x -= 0.015
     }
 
     if (keysMap[83] || keysMap[115]) { //S or s
         angle2Mesh.rotation.x += 0.015
-        if (angle2Mesh.rotation.x > 90 * Math.PI / 180)
-            angle2Mesh.rotation.x = 90 * Math.PI / 180
     }
+
+    if(keysMap[37]){//left arrow key
+        robot_arm.translateX(-0.25)
+    }
+
+    if(keysMap[38]){//up arrow key
+        robot_arm.translateY(0.25)
+    }
+
+    if(keysMap[39]){//right arrow key
+        robot_arm.translateX(0.25)
+    }
+
+    if(keysMap[40]){//down arrow key
+        robot_arm.translateY(-0.25)
+    }
+
     render()
 }
 
