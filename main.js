@@ -156,19 +156,19 @@ function onKeyDown(e) {
     }
 
     if(keysMap[37]){//left arrow key
-        robot_arm.translateX(-0.25)
+        robot_arm.position.x -= 0.25
     }
 
     if(keysMap[38]){//up arrow key
-        robot_arm.translateY(0.25)
+        robot_arm.position.y += 0.25;
     }
 
     if(keysMap[39]){//right arrow key
-        robot_arm.translateX(0.25)
+        robot_arm.position.x += 0.25
     }
 
     if(keysMap[40]){//down arrow key
-        robot_arm.translateY(-0.25)
+        robot_arm.position.y -= 0.25
     }
 
     render()
