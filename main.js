@@ -13,21 +13,22 @@ function createCameras() {
     
     camera_side.position.x = 10
     camera_side.position.y = -30
-    camera_side.position.z = 5
-    camera_side.lookAt(new THREE.Vector3(10, 0, 5))  
+    camera_side.position.z = 15
+    camera_side.lookAt(new THREE.Vector3(10, 0, 15))  
 
     camera_top = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
     camera_top.position.x = 14
     camera_top.position.y = 15
-    camera_top.position.z = 35
-    camera_top.lookAt(new THREE.Vector3(10, 0, 5))  
+    camera_top.position.z = 50
+    camera_top.lookAt(new THREE.Vector3(14, 15, 0))  
 
     
     camera_front = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
-    camera_front.position.x = 0
+    camera_front.position.x = -30
     camera_front.position.y = 14.5
-    camera_front.position.z = 10
-    camera_front.lookAt(new THREE.Vector3(10, 0, 5))  
+    camera_front.position.z = 15
+    camera_front.lookAt(new THREE.Vector3(0, 14.5, 15))  
+    camera_front.rotation.z = -90 * Math.PI / 180
 
 
     active_camera = camera_side
@@ -111,6 +112,21 @@ function createTargetSupport(x, y, z) {
 }
 
 
+function onKeyDown(e) {
+    switch(e.keyCode) {
+        case 49: //1
+        active_camera = camera_top
+        break
+        case 50: //2
+        active_camera = camera_side 
+        break
+        case 51: //3
+        active_camera = camera_front
+        break
+    }
+    render()
+}
+
 function createScene() {
     scene = new THREE.Scene()
     scene.add(new THREE.AxesHelper(5))
@@ -168,6 +184,9 @@ function init() {
 
     createScene()
     createCameras()
+
+    //React to user input
+    window.addEventListener("keydown", onKeyDown)
 
     render()
 }
