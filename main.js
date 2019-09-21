@@ -1,6 +1,8 @@
 var camera_top, camera_side, camera_front; //cameras
 var scene, renderer, active_camera;
 
+var angle1Mesh, angle2Mesh, angle3Mesh;
+
 var robot_arm;
 
 //renders the entire scene
@@ -54,7 +56,7 @@ function createBase(x,y,z) {
 }
 
 function createArmBase(x,y,z) {
-    let geometry = new THREE.SphereGeometry(2,20,20, 0, Math.PI)
+    let geometry = new THREE.SphereGeometry(2,20,20, 0, 2*Math.PI)
     let material = new THREE.MeshBasicMaterial({wireframe: true, color: 0xffff00} )
     let base = new THREE.Mesh(geometry,material)
     base.position.set(x,y,z)
@@ -129,6 +131,18 @@ function onKeyDown(e) {
                 node.material.wireframe = !node.material.wireframe
         })
         break
+        case 81: //Q
+        case 113: //q
+        angle2Mesh.rotation.y -= 0.015
+        if (angle2Mesh.rotation.y < -90 * Math.PI / 180)
+            angle2Mesh.rotation.y = -90 * Math.PI / 180
+        break
+        case 87: //W
+        case 119: //w
+        angle2Mesh.rotation.y += 0.015
+        if (angle2Mesh.rotation.y > 90 * Math.PI / 180)
+            angle2Mesh.rotation.y = 90 * Math.PI / 180
+        break
     }
     render()
 }
@@ -148,7 +162,7 @@ function createScene() {
     
     
     //create robotic arm components
-    let arm_base = createArmBase(11.5, 14.5, 6) //semi-sphere
+    let arm_base = createArmBase(0, 0, 1) //semi-sphere
     let forearm = createArm(0, 0, 5.5)
     let arm_joint = createArmNode(0, 0, 5)
     let arm = createArm(0,0,5)
@@ -164,14 +178,14 @@ function createScene() {
     arm.add(hand_joint)
     arm_joint.add(arm)
     forearm.add(arm_joint)
-
-    //unite both graphs
     arm_base.add(forearm)
-    arm_base.add(base)    
 
 
     //final object: robot_arm
     robot_arm.add(arm_base)
+    robot_arm.add(base)
+
+    robot_arm.position.set(11.5,14.5,4)
 
     //create target
     let target = new THREE.Object3D()
@@ -180,6 +194,12 @@ function createScene() {
 
     scene.add(robot_arm)
     scene.add(target)
+
+    angle3Mesh = arm_joint
+    angle2Mesh = arm_base
+    angle1Mesh = arm_base
+
+    angle3Mesh.rotation.y = 90 * Math.PI / 180
 }
 
 //setup of scene
