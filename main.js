@@ -12,8 +12,9 @@ function createCameras() {
     camera_side.position.x = x
     camera_side.position.y = y
     camera_side.position.z = z
-    camera_side.lookAt(new THREE.Vector3(x, 0, z))
-    
+
+    camera_side.lookAt(new THREE.Vector3(x, 0, z))  
+
 }
 
 
@@ -75,23 +76,45 @@ function createFinger(x,y,z) {
     return mesh
 }
 
+function createTarget(x, y, z) {
+    var geometry = new THREE.TorusGeometry(1.5, 0.3, 10, 30)
+    var material = new THREE.MeshBasicMaterial({wireframe: true, color: 0xFFFF00})
+    var mesh = new THREE.Mesh(geometry, material)
+    mesh.position.set(x,y,z)
+    mesh.rotation.x = Math.PI / 2
+    return mesh
+}
+
+function createTargetSupport(x, y, z) {
+    var geometry = new THREE.BoxGeometry(2, 2, 24)
+    var material = new THREE.MeshBasicMaterial({wireframe: true, color: 0x0FF500})
+    var mesh = new THREE.Mesh(geometry, material)
+    mesh.position.set(x,y,z)
+
+    return mesh
+}
+
+
 function createScene() {
     scene = new THREE.Scene()
     scene.add(new THREE.AxesHelper(5))
     let base = new THREE.Object3D()
     base.add(createWheel(5, 8, 2))
     base.add(createWheel(5, 21, 2))
-    base.add(createWheel(18,8,2))
-    base.add(createWheel(18,21,2))
-    base.add(createBase(11.5,14.5,5))
-    base.add(createArmBase(11.5,14.5,6))
-    base.add(createArm(11.5,14.5,11.5))
-    base.add(createArmNode(11.5,14.5,16.5))
-    base.add(createArm(11.5,14.5,21.5))
-    base.add(createArmNode(11.5,14.5,26.5))
-    base.add(createHandBase(11.5,14.5,28.5))
-    base.add(createFinger(10,14.5,30.5))
-    base.add(createFinger(13,14.5,30.5))
+    base.add(createWheel(18, 8, 2))
+    base.add(createWheel(18, 21, 2))
+    base.add(createBase(11.5, 14.5, 5))
+    base.add(createArmBase(11.5, 14.5, 6))
+    base.add(createArm(11.5, 14.5, 11.5))
+    base.add(createArmNode(11.5, 14.5, 16.5))
+    base.add(createArm(11.5, 14.5, 21.5))
+    base.add(createArmNode(11.5, 14.5, 26.5))
+    base.add(createHandBase(11.5, 14.5, 28.5))
+    base.add(createFinger(10, 14.5, 30.5))
+    base.add(createFinger(13, 14.5, 30.5))
+    
+    base.add(createTarget(40, 14.5, 26))
+    base.add(createTargetSupport(40, 14.5, 12))
     scene.add(base)
 }
 
