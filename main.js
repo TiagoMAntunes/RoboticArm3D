@@ -113,6 +113,7 @@ function createTargetSupport(x, y, z) {
     return mesh
 }
 
+var keysMap = {81: false, 113: false, 87: false, 119: false, 65: false, 97: false, 83: false, 115: false}
 
 function onKeyDown(e) {
     switch(e.keyCode) {
@@ -131,20 +132,42 @@ function onKeyDown(e) {
                 node.material.wireframe = !node.material.wireframe
         })
         break
-        case 81: //Q
-        case 113: //q
-        angle2Mesh.rotation.y -= 0.015
-        if (angle2Mesh.rotation.y < -90 * Math.PI / 180)
-            angle2Mesh.rotation.y = -90 * Math.PI / 180
-        break
-        case 87: //W
-        case 119: //w
-        angle2Mesh.rotation.y += 0.015
-        if (angle2Mesh.rotation.y > 90 * Math.PI / 180)
-            angle2Mesh.rotation.y = 90 * Math.PI / 180
-        break
+    }
+
+    if (e.keyCode in keysMap) {
+        keysMap[e.keyCode] = true
+    }
+
+    if (keysMap[81] || keysMap[113]) { //Q or q
+    angle2Mesh.rotation.y -= 0.015
+    if (angle2Mesh.rotation.y < -90 * Math.PI / 180)
+        angle2Mesh.rotation.y = -90 * Math.PI / 180
+    }
+    
+    if (keysMap[87] || keysMap[119]) { //W or w
+    angle2Mesh.rotation.y += 0.015
+    if (angle2Mesh.rotation.y > 90 * Math.PI / 180)
+        angle2Mesh.rotation.y = 90 * Math.PI / 180
+    }
+
+    if (keysMap[65] || keysMap[97]) { //A or a
+    angle2Mesh.rotation.x -= 0.015
+    if (angle2Mesh.rotation.x < -90 * Math.PI / 180)
+        angle2Mesh.rotation.x = -90 * Math.PI / 180
+    }
+
+    if (keysMap[83] || keysMap[115]) { //S or s
+        angle2Mesh.rotation.x += 0.015
+        if (angle2Mesh.rotation.x > 90 * Math.PI / 180)
+            angle2Mesh.rotation.x = 90 * Math.PI / 180
     }
     render()
+}
+
+function onKeyUp(e) {
+    if (e.keyCode in keysMap) {
+        keysMap[e.keyCode] = false
+    }
 }
 
 function createScene() {
@@ -213,6 +236,7 @@ function init() {
 
     //React to user input
     window.addEventListener("keydown", onKeyDown)
+    window.addEventListener("keyup", onKeyUp)
 
     render()
 }
