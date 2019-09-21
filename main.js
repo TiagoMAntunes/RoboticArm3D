@@ -123,6 +123,12 @@ function onKeyDown(e) {
         case 51: //3
         active_camera = camera_front
         break
+        case 52: //4
+        scene.traverse(function (node) {
+            if (node instanceof THREE.Mesh)
+                node.material.wireframe = !node.material.wireframe
+        })
+        break
     }
     render()
 }
