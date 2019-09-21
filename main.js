@@ -1,22 +1,36 @@
 var camera_top, camera_side, camera_front; //cameras
-var scene, renderer;
+var scene, renderer, active_camera;
 
 var robot_arm;
 
 //renders the entire scene
 function render() {
-    renderer.render(scene, camera_side);
+    renderer.render(scene, active_camera);
 }
 
 function createCameras() {
     camera_side = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
-    const x = 10, y = -30, z = 5;
-    camera_side.position.x = x
-    camera_side.position.y = y
-    camera_side.position.z = z
+    
+    camera_side.position.x = 10
+    camera_side.position.y = -30
+    camera_side.position.z = 5
+    camera_side.lookAt(new THREE.Vector3(10, 0, 5))  
 
-    camera_side.lookAt(new THREE.Vector3(x, 0, z))  
+    camera_top = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
+    camera_top.position.x = 14
+    camera_top.position.y = 15
+    camera_top.position.z = 35
+    camera_top.lookAt(new THREE.Vector3(10, 0, 5))  
 
+    
+    camera_front = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
+    camera_front.position.x = 0
+    camera_front.position.y = 14.5
+    camera_front.position.z = 10
+    camera_front.lookAt(new THREE.Vector3(10, 0, 5))  
+
+
+    active_camera = camera_side
 }
 
 
