@@ -141,18 +141,22 @@ function onKeyDown(e) {
 
     if (keysMap[81] || keysMap[113]) { //Q or q
         angle2Mesh.rotation.y -= 0.015
+        if (angle2Mesh.rotation.y < -90 * Math.PI / 180)
+        angle2Mesh.rotation.y = -90 * Math.PI / 180
     }
     
     if (keysMap[87] || keysMap[119]) { //W or w
         angle2Mesh.rotation.y += 0.015
+        if (angle2Mesh.rotation.y > 90 * Math.PI / 180)
+        angle2Mesh.rotation.y = 90 * Math.PI / 180
     }
 
     if (keysMap[65] || keysMap[97]) { //A or a
-        angle2Mesh.rotation.x -= 0.015
+        angle2Mesh.rotation.z -= 0.015
     }
 
     if (keysMap[83] || keysMap[115]) { //S or s
-        angle2Mesh.rotation.x += 0.015
+        angle2Mesh.rotation.z += 0.015
     }
 
     if(keysMap[37]){//left arrow key
