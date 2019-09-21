@@ -1,6 +1,8 @@
 var camera_top, camera_side, camera_front; //cameras
 var scene, renderer;
 
+var robot_arm;
+
 //renders the entire scene
 function render() {
     renderer.render(scene, camera_side);
@@ -19,9 +21,9 @@ function createCameras() {
 
 
 function createWheel(x, y, z) {
-    var geometry = new THREE.SphereGeometry(2,20,20)
-    var material = new THREE.MeshBasicMaterial({wireframe: true, color: 0xffff00} )
-    var wheel = new THREE.Mesh(geometry,material)
+    let geometry = new THREE.SphereGeometry(2,20,20)
+    let material = new THREE.MeshBasicMaterial({wireframe: true, color: 0xffff00} )
+    let wheel = new THREE.Mesh(geometry,material)
     wheel.position.set(x,y,z)
     return wheel
 }
@@ -29,66 +31,66 @@ function createWheel(x, y, z) {
 
 function createBase(x,y,z) {
     //Base is rectangular and has a ball on its center
-    var geometry = new THREE.BoxGeometry(20,20,2)
-    var material = new THREE.MeshBasicMaterial({wireframe: true, color: 0x0000ff})
-    var mesh = new THREE.Mesh(geometry,material)
+    let geometry = new THREE.BoxGeometry(20,20,2)
+    let material = new THREE.MeshBasicMaterial({wireframe: true, color: 0x0000ff})
+    let mesh = new THREE.Mesh(geometry,material)
     mesh.position.set(x,y,z)
     return mesh
 }
 
 function createArmBase(x,y,z) {
-    var geometry = new THREE.SphereGeometry(2,20,20, 0, Math.PI)
-    var material = new THREE.MeshBasicMaterial({wireframe: true, color: 0xffff00} )
-    var base = new THREE.Mesh(geometry,material)
+    let geometry = new THREE.SphereGeometry(2,20,20, 0, Math.PI)
+    let material = new THREE.MeshBasicMaterial({wireframe: true, color: 0xffff00} )
+    let base = new THREE.Mesh(geometry,material)
     base.position.set(x,y,z)
     return base
 }
 
 function createArm(x,y,z) {
-    var geometry = new THREE.BoxGeometry(1,1,7)
-    var material = new THREE.MeshBasicMaterial({wireframe: true, color: 0xff0000} )
-    var arm = new THREE.Mesh(geometry,material)
+    let geometry = new THREE.BoxGeometry(1,1,7)
+    let material = new THREE.MeshBasicMaterial({wireframe: true, color: 0xff0000} )
+    let arm = new THREE.Mesh(geometry,material)
     arm.position.set(x,y,z)
     return arm
 }
 
 function createArmNode(x,y,z) {
-    var geometry = new THREE.SphereGeometry(1.5,20,20)
-    var material = new THREE.MeshBasicMaterial({wireframe: true, color: 0xffffff})
-    var mesh = new THREE.Mesh(geometry,material)
+    let geometry = new THREE.SphereGeometry(1.5,20,20)
+    let material = new THREE.MeshBasicMaterial({wireframe: true, color: 0xffffff})
+    let mesh = new THREE.Mesh(geometry,material)
     mesh.position.set(x,y,z)
     return mesh
 }
 
 function createHandBase(x,y,z) {
-    var geometry = new THREE.BoxGeometry(5,5,1)
-    var material = new THREE.MeshBasicMaterial({wireframe: true, color: 0xFFAAFF})
-    var mesh = new THREE.Mesh(geometry,material)
+    let geometry = new THREE.BoxGeometry(5,5,1)
+    let material = new THREE.MeshBasicMaterial({wireframe: true, color: 0xFFAAFF})
+    let mesh = new THREE.Mesh(geometry,material)
     mesh.position.set(x,y,z)
     return mesh
 }
 
 function createFinger(x,y,z) {
-    var geometry = new THREE.BoxGeometry(1,1,3)
-    var material = new THREE.MeshBasicMaterial({wireframe: true, color: 0xFFAABB})
-    var mesh = new THREE.Mesh(geometry,material)
+    let geometry = new THREE.BoxGeometry(1,1,3)
+    let material = new THREE.MeshBasicMaterial({wireframe: true, color: 0xFFAABB})
+    let mesh = new THREE.Mesh(geometry,material)
     mesh.position.set(x,y,z)
     return mesh
 }
 
 function createTarget(x, y, z) {
-    var geometry = new THREE.TorusGeometry(1.5, 0.3, 10, 30)
-    var material = new THREE.MeshBasicMaterial({wireframe: true, color: 0xFFFF00})
-    var mesh = new THREE.Mesh(geometry, material)
+    let geometry = new THREE.TorusGeometry(1.5, 0.3, 10, 30)
+    let material = new THREE.MeshBasicMaterial({wireframe: true, color: 0xFFFF00})
+    let mesh = new THREE.Mesh(geometry, material)
     mesh.position.set(x,y,z)
     mesh.rotation.x = Math.PI / 2
     return mesh
 }
 
 function createTargetSupport(x, y, z) {
-    var geometry = new THREE.BoxGeometry(2, 2, 24)
-    var material = new THREE.MeshBasicMaterial({wireframe: true, color: 0x0FF500})
-    var mesh = new THREE.Mesh(geometry, material)
+    let geometry = new THREE.BoxGeometry(2, 2, 24)
+    let material = new THREE.MeshBasicMaterial({wireframe: true, color: 0x0FF500})
+    let mesh = new THREE.Mesh(geometry, material)
     mesh.position.set(x,y,z)
 
     return mesh
@@ -99,7 +101,7 @@ function createScene() {
     scene = new THREE.Scene()
     scene.add(new THREE.AxesHelper(5))
     
-    let robot_arm = new THREE.Object3D()
+    robot_arm = new THREE.Object3D()
 
     //create base with wheels
     let base = createBase(0, 0, 0)
