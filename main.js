@@ -5,6 +5,8 @@ var angle1Mesh, angle2Mesh, angle3Mesh;
 
 var robot_arm;
 
+var wireframe;
+
 //renders the entire scene
 function render() {
     renderer.render(scene, active_camera);
@@ -113,38 +115,21 @@ function createTargetSupport(x, y, z) {
     return mesh
 }
 
-var keysMap = {81: false, 113: false, 87: false, 119: false, 65: false, 97: false, 83: false, 115: false,
-    37: false, 38: false, 39: false, 40: false}
+function traverseElements(obj) {
+    if (obj instanceof THREE.Mesh)
+        obj.material.wireframe = !obj.material.wireframe
+    if (obj !== undefined) 
+        for (i in obj.children) 
+            traverseElements(obj.children[i])
+}
 
-function onKeyDown(e) {
-    switch(e.keyCode) {
-        case 49: //1
-        active_camera = camera_top
-        break
-        case 50: //2
-        active_camera = camera_side 
-        break
-        case 51: //3
-        active_camera = camera_front
-        break
-        case 52: //4
-        scene.traverse(function (node) {
-            if (node instanceof THREE.Mesh)
-                node.material.wireframe = !node.material.wireframe
-        })
-        break
-    }
-
-    if (e.keyCode in keysMap) {
-        keysMap[e.keyCode] = true
-    }
-
+function update() {
     if (keysMap[81] || keysMap[113]) { //Q or q
         angle2Mesh.rotation.y -= 0.015
         if (angle2Mesh.rotation.y < -90 * Math.PI / 180)
         angle2Mesh.rotation.y = -90 * Math.PI / 180
     }
-    
+
     if (keysMap[87] || keysMap[119]) { //W or w
         angle2Mesh.rotation.y += 0.015
         if (angle2Mesh.rotation.y > 90 * Math.PI / 180)
@@ -175,7 +160,36 @@ function onKeyDown(e) {
         robot_arm.position.y -= 0.25
     }
 
-    render()
+    if (wireframe) {
+        traverseElements(scene);
+        wireframe = false;
+    }
+
+}
+
+
+var keysMap = {81: false, 113: false, 87: false, 119: false, 65: false, 97: false, 83: false, 115: false,
+    37: false, 38: false, 39: false, 40: false}
+
+function onKeyDown(e) {
+    switch(e.keyCode) {
+        case 49: //1
+        active_camera = camera_top
+        break
+        case 50: //2
+        active_camera = camera_side 
+        break
+        case 51: //3
+        active_camera = camera_front
+        break
+        case 52: //4
+        wireframe = true;
+        break
+    }
+
+    if (e.keyCode in keysMap) {
+        keysMap[e.keyCode] = true
+    }
 }
 
 function onKeyUp(e) {
@@ -239,6 +253,16 @@ function createScene() {
     angle3Mesh.rotation.y = 90 * Math.PI / 180
 }
 
+function animate() {
+    update()
+    render()
+    requestAnimationFrame(animate)
+}
+
+function onResize() {
+    renderer.setSize(window.innerWidth, window.innerHeight)
+}
+
 //setup of scene
 function init() {
     renderer = new THREE.WebGLRenderer({antialias: true})
@@ -251,6 +275,6 @@ function init() {
     //React to user input
     window.addEventListener("keydown", onKeyDown)
     window.addEventListener("keyup", onKeyUp)
-
-    render()
+    window.addEventListener("resize", onResize)
+    animate()
 }
