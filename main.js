@@ -41,7 +41,7 @@ function createCameras() {
 
 function createWheel(x, y, z) {
     let geometry = new THREE.SphereGeometry(2,20,20)
-    let material = new THREE.MeshBasicMaterial({wireframe: true, color: 0xffff00} )
+    let material = new THREE.MeshBasicMaterial({wireframe: true, color: 0x000000} )
     let wheel = new THREE.Mesh(geometry,material)
     wheel.position.set(x,y,z)
     return wheel
@@ -51,7 +51,7 @@ function createWheel(x, y, z) {
 function createBase(x,y,z) {
     //Base is rectangular and has a ball on its center
     let geometry = new THREE.BoxGeometry(20,20,2)
-    let material = new THREE.MeshBasicMaterial({wireframe: true, color: 0x0000ff})
+    let material = new THREE.MeshBasicMaterial({wireframe: true, color: 0x6e7574})
     let mesh = new THREE.Mesh(geometry,material)
     mesh.position.set(x,y,z)
     return mesh
@@ -59,7 +59,7 @@ function createBase(x,y,z) {
 
 function createArmBase(x,y,z) {
     let geometry = new THREE.SphereGeometry(2,20,20, 0, 2*Math.PI)
-    let material = new THREE.MeshBasicMaterial({wireframe: true, color: 0xffff00} )
+    let material = new THREE.MeshBasicMaterial({wireframe: true, color: 0x383836} )
     let base = new THREE.Mesh(geometry,material)
     base.position.set(x,y,z)
     return base
@@ -67,7 +67,7 @@ function createArmBase(x,y,z) {
 
 function createArm(x,y,z) {
     let geometry = new THREE.BoxGeometry(1,1,7)
-    let material = new THREE.MeshBasicMaterial({wireframe: true, color: 0xff0000} )
+    let material = new THREE.MeshBasicMaterial({wireframe: true, color: 0xc2c9cf} )
     let arm = new THREE.Mesh(geometry,material)
     arm.position.set(x,y,z)
     return arm
@@ -75,7 +75,7 @@ function createArm(x,y,z) {
 
 function createArmNode(x,y,z) {
     let geometry = new THREE.SphereGeometry(1.5,20,20)
-    let material = new THREE.MeshBasicMaterial({wireframe: true, color: 0xffffff})
+    let material = new THREE.MeshBasicMaterial({wireframe: true, color: 0x383836})
     let mesh = new THREE.Mesh(geometry,material)
     mesh.position.set(x,y,z)
     return mesh
@@ -83,7 +83,7 @@ function createArmNode(x,y,z) {
 
 function createHandBase(x,y,z) {
     let geometry = new THREE.BoxGeometry(5,5,1)
-    let material = new THREE.MeshBasicMaterial({wireframe: true, color: 0xFFAAFF})
+    let material = new THREE.MeshBasicMaterial({wireframe: true, color: 0x41576b})
     let mesh = new THREE.Mesh(geometry,material)
     mesh.position.set(x,y,z)
     return mesh
@@ -91,7 +91,7 @@ function createHandBase(x,y,z) {
 
 function createFinger(x,y,z) {
     let geometry = new THREE.BoxGeometry(1,1,3)
-    let material = new THREE.MeshBasicMaterial({wireframe: true, color: 0xFFAABB})
+    let material = new THREE.MeshBasicMaterial({wireframe: true, color: 0x6e7574})
     let mesh = new THREE.Mesh(geometry,material)
     mesh.position.set(x,y,z)
     return mesh
@@ -103,14 +103,16 @@ function createTarget(x, y, z) {
     let mesh = new THREE.Mesh(geometry, material)
     mesh.position.set(x,y,z)
     mesh.rotation.x = Math.PI / 2
+    mesh.rotation.y = Math.PI / 2
     return mesh
 }
 
 function createTargetSupport(x, y, z) {
-    let geometry = new THREE.BoxGeometry(2, 2, 24)
-    let material = new THREE.MeshBasicMaterial({wireframe: true, color: 0x0FF500})
+    let geometry = new THREE.CylinderGeometry(1, 1, 18, 20)
+    let material = new THREE.MeshBasicMaterial({wireframe: true, color: 0x473d15})
     let mesh = new THREE.Mesh(geometry, material)
     mesh.position.set(x,y,z)
+    mesh.rotation.x = Math.PI / 2
 
     return mesh
 }
@@ -201,6 +203,7 @@ function onKeyUp(e) {
 function createScene() {
     scene = new THREE.Scene()
     scene.add(new THREE.AxesHelper(5))
+    scene.background = new THREE.Color(0xe4edf5)
     
     robot_arm = new THREE.Object3D()
 
@@ -240,8 +243,8 @@ function createScene() {
 
     //create target
     let target = new THREE.Object3D()
-    target.add(createTarget(40, 14.5, 26))
-    target.add(createTargetSupport(40, 14.5, 12))
+    target.add(createTarget(40, 14.5, 20))
+    target.add(createTargetSupport(40, 14.5, 9))
 
     scene.add(robot_arm)
     scene.add(target)
