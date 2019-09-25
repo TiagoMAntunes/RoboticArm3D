@@ -15,22 +15,16 @@ function render() {
 function createCameras() {
     camera_side = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
     
-    camera_side.position.x = 10
-    camera_side.position.y = -30
-    camera_side.position.z = 15
+    camera_side.position.set(10,-30,15)
     camera_side.lookAt(new THREE.Vector3(10, 0, 15))  
 
     camera_top = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
-    camera_top.position.x = 14
-    camera_top.position.y = 15
-    camera_top.position.z = 50
+    camera_top.position.set(14,15,50)
     camera_top.lookAt(new THREE.Vector3(14, 15, 0))  
 
     
     camera_front = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
-    camera_front.position.x = -30
-    camera_front.position.y = 14.5
-    camera_front.position.z = 15
+    camera_front.position.set(-30, 14.5,15)
     camera_front.lookAt(new THREE.Vector3(0, 14.5, 15))  
     camera_front.rotation.z = -90 * Math.PI / 180
 
