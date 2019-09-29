@@ -37,8 +37,29 @@ class RoboticArm extends SceneObject {
             f1x, f1y, f1z, fWIDTH, fHEIGHT, fDEPTH, fingerMAT,  // fingers
             f2x, f2y, f2z)
 
-        base.add(arm)
+        this.add(arm)
 
         this.position.set(x, y, z)
+    }
+
+    update(){//left, up, right, down, Q, q, W, w, A, a, S, s) {
+        if(keysMap[37]){//left arrow key
+            this.position.x -= 0.25
+        }
+    
+        if(keysMap[38]){//up arrow key
+            this.position.y += 0.25;
+        }
+    
+        if(keysMap[39]){//right arrow key
+            this.position.x += 0.25
+        }
+    
+        if(keysMap[40]){//down arrow key
+            this.position.y -= 0.25
+        }
+
+        let arm = this.children[1]
+        arm.update()
     }
 }

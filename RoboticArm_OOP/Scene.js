@@ -1,5 +1,6 @@
-var camera_top, camera_side, camera_front; //cameras
-var scene, active_camera;
+var camera_top, camera_side, camera_front //cameras
+var scene, active_camera, renderer
+var wireframe
 var robotic_arm
 
 function render() {
@@ -23,7 +24,7 @@ f1x, f1y, f1z, fWIDTH, fHEIGHT, fDEPTH, fingerMAT,  // fingers
 f2x, f2y, f2z) {
 
     'user strict'
-    let robotic_arm = new RoboticArm(x, y, z, 
+    robotic_arm = new RoboticArm(x, y, z, 
         basex, basey, basez,
         bx, by, bz,  width, height, depth, baseMAT,
         w1x, w1y, w1z, w2x, w2y, w2z, w3x, w3y, w3z, w4x, w4y, w4z,
@@ -40,7 +41,6 @@ f2x, f2y, f2z) {
         f2x, f2y, f2z)
 
     scene.add(robotic_arm)
-
 }
 
 function createScene() {
@@ -58,20 +58,24 @@ function createScene() {
     let fingerMAT = new THREE.MeshBasicMaterial({wireframe: true, color: 0x6e7574})
 
     createRoboticArm(0, 0, 0,
-        11.5, 14.5, 3, 
-        0, 0, 0, 20, 20, 2, baseMAT,
-        -6.5, -6.5, -3, -6.5, 6.5, -3, 6.5, -6.5, -3, 6.5, 6.5, -3,
-        2, 20, 20, 0, 2 * Math.PI, wheelMAT, 
-        0, 0, 0,    //arm x, y, z
-        0, 0, 1, 2, 20, 20, 0, Math.PI, jointMAT, 90 * Math.PI / 180,  //arm base
-        0, 0, 0, //rotation object
-        0, 0, 4.5, 1, 1, 7, armMAT,   // lower arm
-        0, 0, 5, 1.5, 20, 20, 0, 2 * Math.PI,   //arm joint
-        0, 0, 5,
-        0, 0, 5, 
-        0, 0, 2, 5, 5, 1, handBaseMAT,
-        0, -2.4, 2, 1, 1, 3, fingerMAT,
-        0, 2.4, 2)  
+                    11.5, 14.5, 3, 
+                    0, 0, 0, 20, 20, 2, baseMAT,
+                    -6.5, -6.5, -3, -6.5, 6.5, -3, 6.5, -6.5, -3, 6.5, 6.5, -3,
+                    2, 20, 20, 0, 2 * Math.PI, wheelMAT, 
+                    11.5, 14.5, 2,    //arm x, y, z
+                    0, 0, 1, 2, 20, 20, 0, Math.PI, jointMAT, 90 * Math.PI / 180,  //arm base
+                    0, 0, 0, //rotation object
+                    0, 0, 4.5, 1, 1, 7, armMAT,   // lower arm
+                    0, 0, 5, 1.5, 20, 20, 0, 2 * Math.PI,   //arm joint
+                    0, 0, 5,
+                    0, 0, 5, 
+                    0, 0, 2, 5, 5, 1, handBaseMAT,
+                    0, -2.4, 2, 1, 1, 3, fingerMAT,
+                    0, 2.4, 2)  
+}
+
+function update() {
+    robotic_arm.update()
 }
 
 function createCameras() {

@@ -1,7 +1,46 @@
+var keysMap = {81: false, 113: false, 87: false, 119: false, 65: false, 97: false, 83: false, 115: false,
+  37: false, 38: false, 39: false, 40: false}
+
+
+function onKeyUp(e) {
+    if (e.keyCode in keysMap) {
+        keysMap[e.keyCode] = false
+    }
+}
+
+function onKeyDown(e) {
+  switch(e.keyCode) {
+      case 49: //1
+      active_camera = camera_top
+      break
+      case 50: //2
+      active_camera = camera_side
+      break
+      case 51: //3
+      active_camera = camera_front
+      break
+      case 52: //4
+      wireframe = true;
+      break
+  }
+
+  if (e.keyCode in keysMap) {
+      keysMap[e.keyCode] = true
+  }
+}
+
+function traverseElements(obj) {
+  if (obj instanceof THREE.Mesh)
+      obj.material.wireframe = !obj.material.wireframe
+  if (obj !== undefined)
+      for (i in obj.children)
+          traverseElements(obj.children[i])
+}
+
 function animate() {
-//    update()
+    update()
     render()
-//    requestAnimationFrame(animate)
+    requestAnimationFrame(animate)
 }
 
 function onResize() {
@@ -19,10 +58,10 @@ function init() {
     createScene(renderer)
     createCameras()
 
-  /*  //React to user input
+
     window.addEventListener("keydown", onKeyDown)
     window.addEventListener("keyup", onKeyUp)
-  */  window.addEventListener("resize", onResize)
+    window.addEventListener("resize", onResize)
     animate()
  
 }
