@@ -29,14 +29,6 @@ function onKeyDown(e) {
   }
 }
 
-function traverseElements(obj) {
-  if (obj instanceof THREE.Mesh)
-      obj.material.wireframe = !obj.material.wireframe
-  if (obj !== undefined)
-      for (i in obj.children)
-          traverseElements(obj.children[i])
-}
-
 function animate() {
     update()
     render()
@@ -55,7 +47,7 @@ function init() {
     renderer.setSize(window.innerWidth, window.innerHeight)
     document.body.appendChild(renderer.domElement);
 
-    createScene(renderer)
+    createScene()
     createCameras()
 
 

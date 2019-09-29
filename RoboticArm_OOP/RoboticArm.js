@@ -42,7 +42,7 @@ class RoboticArm extends SceneObject {
         this.position.set(x, y, z)
     }
 
-    update(){//left, up, right, down, Q, q, W, w, A, a, S, s) {
+    update() {
         if(keysMap[37]){//left arrow key
             this.position.x -= 0.25
         }

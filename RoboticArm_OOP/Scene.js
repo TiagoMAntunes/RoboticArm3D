@@ -1,7 +1,7 @@
 var camera_top, camera_side, camera_front //cameras
 var scene, active_camera, renderer
 var wireframe
-var robotic_arm
+var robotic_arm, target
 
 function render() {
     renderer.render(scene, active_camera);
@@ -43,6 +43,17 @@ f2x, f2y, f2z) {
     scene.add(robotic_arm)
 }
 
+function createTarget(x, y, z,
+    rx, ty, tz, radius, tube, radialSegments, tubularSegments, targetMAT, rotX, rotY,
+    sx, sy, sz, radiusTop, radiusBottom, height, SupRadialSegments, supMAT, supRotX) {
+
+    target = new Target(x, y, z,
+        rx, ty, tz, radius, tube, radialSegments, tubularSegments, targetMAT, rotX, rotY,
+        sx, sy, sz, radiusTop, radiusBottom, height, SupRadialSegments, supMAT, supRotX)
+
+    scene.add(target)
+}
+
 function createScene() {
     'use strict'
 
@@ -56,6 +67,8 @@ function createScene() {
     let armMAT = new THREE.MeshBasicMaterial({wireframe: true, color: 0xc2c9cf})
     let handBaseMAT = new THREE.MeshBasicMaterial({wireframe: true, color: 0x41576b})
     let fingerMAT = new THREE.MeshBasicMaterial({wireframe: true, color: 0x6e7574})
+    let targetMAT = new THREE.MeshBasicMaterial({wireframe: true, color: 0xFFFF00})
+    let supMAT = new THREE.MeshBasicMaterial({wireframe: true, color: 0x000000})
 
     createRoboticArm(0, 0, 0,
                     11.5, 14.5, 3, 
@@ -63,19 +76,36 @@ function createScene() {
                     -6.5, -6.5, -3, -6.5, 6.5, -3, 6.5, -6.5, -3, 6.5, 6.5, -3,
                     2, 20, 20, 0, 2 * Math.PI, wheelMAT, 
                     11.5, 14.5, 2,    //arm x, y, z
-                    0, 0, 1, 2, 20, 20, 0, Math.PI, jointMAT, 90 * Math.PI / 180,  //arm base
+                    0, 0, 2, 2, 20, 20, 0, Math.PI, jointMAT, 90 * Math.PI / 180,  //arm base
                     0, 0, 0, //rotation object
                     0, 0, 4.5, 1, 1, 7, armMAT,   // lower arm
                     0, 0, 5, 1.5, 20, 20, 0, 2 * Math.PI,   //arm joint
                     0, 0, 5,
                     0, 0, 5, 
                     0, 0, 2, 5, 5, 1, handBaseMAT,
-                    0, -2.4, 2, 1, 1, 3, fingerMAT,
-                    0, 2.4, 2)  
+                    0, -2, 2, 1, 1, 3, fingerMAT,
+                    0, 2, 2)  
+
+    createTarget(40, 14.5, 0,
+                0, 0, 12, 1.5, 0.3, 10, 30, targetMAT, Math.PI / 2, Math.PI / 2,
+                0, 0, 5, 1, 1, 10, 20, supMAT, Math.PI / 2)
 }
+
+function traverseElements(obj) {
+    if (obj instanceof THREE.Mesh)
+        obj.material.wireframe = !obj.material.wireframe
+    if (obj !== undefined)
+        for (i in obj.children)
+            traverseElements(obj.children[i])
+  }
 
 function update() {
     robotic_arm.update()
+
+    if (wireframe) {
+        traverseElements(scene);
+        wireframe = false;
+    }
 }
 
 function createCameras() {

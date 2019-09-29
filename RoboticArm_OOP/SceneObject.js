@@ -29,18 +29,21 @@ class SceneObject extends THREE.Object3D {
         return mesh
     }
 
-    createSceneObjCylinder(x, y, z, radiusTop, radiusBottom, height, radialSegments, material) {
+    createSceneObjCylinderRotX(x, y, z, radiusTop, radiusBottom, height, radialSegments, material, rotX) {
         let geometry = new THREE.CylinderGeometry(radiusTop, radiusBottom, height, radialSegments)
         let mesh = new THREE.Mesh(geometry, material)
         
+        mesh.rotation.x = rotX
         mesh.position.set(x, y, z)
         return mesh
     }
 
-    createSceneObjTorusRotY(x, y, z, radius, tube, radialSegments, tubularSegments, material) {
+    createSceneObjTorusRotXY(x, y, z, radius, tube, radialSegments, tubularSegments, material, rotX, rotY) {
         let geometry = new THREE.TorusGeometry(radius, tube, radialSegments, tubularSegments)
         let mesh = new THREE.Mesh(geometry, material)
 
+        mesh.rotation.x = rotX
+        mesh.rotation.y = rotY
         mesh.position.set(x, y, z)
         return mesh
     }
