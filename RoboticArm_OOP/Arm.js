@@ -9,13 +9,13 @@ class Arm extends SceneObject {
         let fingerMAT = new THREE.MeshBasicMaterial({wireframe: true, color: 0x6e7574})
 
         // create components
-        let arm_base = super.createSceneObjSphere(0, 0, 2, 2, 20, 20, 0, Math.PI, jointMAT)
+        let arm_base = super.createSceneObjSphere(0, 0, 2, 2, 20, 20, 0, Math.PI, jointMAT.clone())
         let rot_obj = new SceneObject(0, 0, 0)
         let lower_arm = super.createSceneObjBox(0, 0, 4.5, 1, 1, 7, armMAT.clone())
-        let lower_joint = super.createSceneObjSphereRotY(0, 0, 5, 1.5, 20, 20, 0, 2 * Math.PI, jointMAT, 90 * Math.PI / 180)
+        let lower_joint = super.createSceneObjSphereRotY(0, 0, 5, 1.5, 20, 20, 0, 2 * Math.PI, jointMAT.clone(), 90 * Math.PI / 180)
         let forearm = super.createSceneObjBox(0, 0, 5, 1, 1, 7, armMAT.clone())// arm base
-        let hand_joint = super.createSceneObjSphere(0, 0, 5, 1.5, 20, 20, 0, 2 * Math.PI,jointMAT)
-        let hand_base = super.createSceneObjBox(0, 0, 2, 5, 5, 1, handBaseMAT)
+        let hand_joint = super.createSceneObjSphere(0, 0, 5, 1.5, 20, 20, 0, 2 * Math.PI,jointMAT.clone())
+        let hand_base = super.createSceneObjBox(0, 0, 2, 5, 5, 1, handBaseMAT.clone())
         let finger1 = super.createSceneObjBox(0, -2, 2, 1, 1, 3, fingerMAT.clone())
         let finger2 = super.createSceneObjBox(0, 2, 2, 1, 1, 3, fingerMAT.clone())
         

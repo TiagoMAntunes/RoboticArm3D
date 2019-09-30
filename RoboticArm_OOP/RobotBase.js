@@ -11,7 +11,7 @@ class RobotBase extends SceneObject {
         let phiLength = 2 * Math.PI
 
         // add robot's base platform
-        let base = super.createSceneObjBox(0, 0, 0, 20, 20, 2, baseMAT)
+        let base = super.createSceneObjBox(0, 0, 0, 20, 20, 2, baseMAT.clone())
         this.add(base)
 
         // add robot's wheels
