@@ -1,27 +1,23 @@
 class Arm extends SceneObject {
-    constructor(x, y, z,
-        abx, aby, abz, abR, abWS, abHS, abPS, abPL, jointMAT, rotY,   // arm base 
-        rotx, roty, rotz,   // rotation object
-        ax, ay, az, aWIDTH, aHEIGHT, aDEPTH, armMAT,    //lower arm
-        jx, jy, jz, jR, jWS, jHS, jbPS, jPL,    // arm joint
-        fax, fay, faz,  // forearm
-        j2x, j2y, j2z,  //hand joint
-        hbx, hby, hbz, hbWIDTH, hbHEIGHT, hbDEPTH, handBaseMAT, // handbase
-        f1x, f1y, f1z, fWIDTH, fHEIGHT, fDEPTH, fingerMAT,  // fingers
-        f2x, f2y, f2z) {
-        
+    constructor(x, y, z) { 
         super()
 
+        // create materials
+        let jointMAT = new THREE.MeshBasicMaterial({wireframe: true, color: 0x383836})
+        let armMAT = new THREE.MeshBasicMaterial({wireframe: true, color: 0xc2c9cf})
+        let handBaseMAT = new THREE.MeshBasicMaterial({wireframe: true, color: 0x41576b})
+        let fingerMAT = new THREE.MeshBasicMaterial({wireframe: true, color: 0x6e7574})
+
         // create components
-        let arm_base = super.createSceneObjSphere(abx, aby, abz, abR, abWS, abHS, abPS, abPL, jointMAT)
-        let rot_obj = new SceneObject(rotx, roty, rotz)
-        let lower_arm = super.createSceneObjBox(ax, ay, az, aWIDTH, aHEIGHT, aDEPTH, armMAT)
-        let lower_joint = super.createSceneObjSphereRotY(jx, jy, jz, jR, jWS, jHS, jbPS, jPL, jointMAT, rotY)
-        let forearm = super.createSceneObjBox(fax, fay, faz, aWIDTH, aHEIGHT, aDEPTH, armMAT)// arm base
-        let hand_joint = super.createSceneObjSphere(j2x, j2y, j2z, jR, jWS, jHS, jbPS, jPL, jointMAT)
-        let hand_base = super.createSceneObjBox(hbx, hby, hbz, hbWIDTH, hbHEIGHT, hbDEPTH, handBaseMAT)
-        let finger1 = super.createSceneObjBox(f1x, f1y, f1z, fWIDTH, fHEIGHT, fDEPTH, fingerMAT)
-        let finger2 = super.createSceneObjBox(f2x, f2y, f2z, fWIDTH, fHEIGHT, fDEPTH, fingerMAT)
+        let arm_base = super.createSceneObjSphere(0, 0, 2, 2, 20, 20, 0, Math.PI, jointMAT)
+        let rot_obj = new SceneObject(0, 0, 0)
+        let lower_arm = super.createSceneObjBox(0, 0, 4.5, 1, 1, 7, armMAT)
+        let lower_joint = super.createSceneObjSphereRotY(0, 0, 5, 1.5, 20, 20, 0, 2 * Math.PI, jointMAT, 90 * Math.PI / 180)
+        let forearm = super.createSceneObjBox(0, 0, 5, 1, 1, 7, armMAT)// arm base
+        let hand_joint = super.createSceneObjSphere(0, 0, 5, 1.5, 20, 20, 0, 2 * Math.PI,jointMAT)
+        let hand_base = super.createSceneObjBox(0, 0, 2, 5, 5, 1, handBaseMAT)
+        let finger1 = super.createSceneObjBox(0, -2, 2, 1, 1, 3, fingerMAT)
+        let finger2 = super.createSceneObjBox(0, 2, 2, 1, 1, 3, fingerMAT)
         
         // add components
         hand_base.add(finger1)

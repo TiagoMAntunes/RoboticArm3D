@@ -1,5 +1,8 @@
+var renderer, wireframe
+
 var keysMap = {81: false, 113: false, 87: false, 119: false, 65: false, 97: false, 83: false, 115: false,
   37: false, 38: false, 39: false, 40: false}
+
 
 
 function onKeyUp(e) {
@@ -29,17 +32,15 @@ function onKeyDown(e) {
   }
 }
 
+function onResize() {
+    renderer.setSize(window.innerWidth, window.innerHeight)
+}
+
 function animate() {
     update()
     render()
     requestAnimationFrame(animate)
 }
-
-function onResize() {
-    renderer.setSize(window.innerWidth, window.innerHeight)
-}
-
-
 
 //setup of scene
 function init() {

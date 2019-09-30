@@ -1,25 +1,24 @@
-class RobotBase extends SceneObject {
-    // bx -> base's x position
-    // w1 -> wheel number 1
-    // R -> radius, WS -> widthSegments, HS -> heightSegments
-    // PS -> phiStart, PL -> phiLength, MAT -> material
-     
-    constructor(x, y, z, 
-            bx, by, bz,  width, height, depth, baseMAT,
-            w1x, w1y, w1z, w2x, w2y, w2z, w3x, w3y, w3z, w4x, w4y, w4z,
-            wR, wWS, wHS, wPS, wPL, wheelMAT) {
-
+class RobotBase extends SceneObject {   
+    constructor(x, y, z) {
         super()
 
+        let baseMAT = new THREE.MeshBasicMaterial({wireframe: true, color: 0x6e7574})
+        let wheelMAT = new THREE.MeshBasicMaterial({wireframe: true, color: 0x000000})
+        let radius = 2
+        let widthSegments = 20
+        let heightSegments = 20
+        let phiStart = 0
+        let phiLength = 2 * Math.PI
+
         // add robot's base platform
-        let base = super.createSceneObjBox(bx, by, bz,  width, height, depth, baseMAT)
+        let base = super.createSceneObjBox(0, 0, 0, 20, 20, 2, baseMAT)
         this.add(base)
 
         // add robot's wheels
-        let wheel1 = super.createSceneObjSphere(w1x, w1y, w1z, wR, wWS, wHS, wPS, wPL, wheelMAT)
-        let wheel2 = super.createSceneObjSphere(w2x, w2y, w2z, wR, wWS, wHS, wPS, wPL, wheelMAT)
-        let wheel3 = super.createSceneObjSphere(w3x, w3y, w3z, wR, wWS, wHS, wPS, wPL, wheelMAT)
-        let wheel4 = super.createSceneObjSphere(w4x, w4y, w4z, wR, wWS, wHS, wPS, wPL, wheelMAT)
+        let wheel1 = super.createSceneObjSphere(-6.5, -6.5, -3, radius, widthSegments, heightSegments, phiStart, phiLength, wheelMAT)
+        let wheel2 = super.createSceneObjSphere(-6.5, 6.5, -3, radius, widthSegments, heightSegments, phiStart, phiLength, wheelMAT)
+        let wheel3 = super.createSceneObjSphere(6.5, -6.5, -3, radius, widthSegments, heightSegments, phiStart, phiLength, wheelMAT)
+        let wheel4 = super.createSceneObjSphere(6.5, 6.5, -3, radius, widthSegments, heightSegments, phiStart, phiLength, wheelMAT)
 
         base.add(wheel1)
         base.add(wheel2)
