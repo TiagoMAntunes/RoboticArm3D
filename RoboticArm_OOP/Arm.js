@@ -42,14 +42,14 @@ class Arm extends SceneObject {
         let rot_obj = this.getRotationObject()
         if (keysMap[81] || keysMap[113]) { //Q or q
             rot_obj.rotation.y -= 0.015
-            if (rot_obj.rotation.y < -90 * Math.PI / 180)
-            rot_obj.rotation.y = -90 * Math.PI / 180
+            if (rot_obj.rotation.y < -50 * Math.PI / 180)
+            rot_obj.rotation.y = -50 * Math.PI / 180
         }
     
         if (keysMap[87] || keysMap[119]) { //W or w
             rot_obj.rotation.y += 0.015
-            if (rot_obj.rotation.y > 90 * Math.PI / 180)
-            rot_obj.rotation.y = 90 * Math.PI / 180
+            if (rot_obj.rotation.y > 50 * Math.PI / 180)
+            rot_obj.rotation.y = 50 * Math.PI / 180
         }
     
         if (keysMap[65] || keysMap[97]) { //A or a
