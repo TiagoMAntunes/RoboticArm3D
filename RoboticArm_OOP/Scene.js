@@ -7,7 +7,7 @@ function render() {
 }
 
 function createRoboticArm(x, y, z) {
-    'user strict'
+    'use strict'
     robotic_arm = new RoboticArm(x, y, z)
     scene.add(robotic_arm)
 }
@@ -51,18 +51,14 @@ function update() {
 
 function createCameras() {
     'use strict'
-    camera_side = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
-    camera_side.position.set(10, -30, 15)
-    camera_side.lookAt(new THREE.Vector3(10, 0, 15))  
 
-    camera_top = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
-    camera_top.position.set(15, 15, 50)
-    camera_top.lookAt(new THREE.Vector3(14, 15, 0))  
+    camera_side = new Camera(10, -30, 15, new THREE.Vector3(10, 0, 15))
+    camera_top = new Camera(15, 15, 50, new THREE.Vector3(14, 15, 0))
+    camera_front = new Camera(60, 14.5, 15, new THREE.Vector3(0, 14.5, 15))
 
-    camera_front = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
-    camera_front.position.set(-30, 14.5, 15)
-    camera_front.lookAt(new THREE.Vector3(0, 14.5, 15))  
-    camera_front.rotation.z = -90 * Math.PI / 180
+    camera_front.rotateZ(-90 * Math.PI / 180)
+    camera_top.rotateZ(180 * Math.PI / 180)
+    camera_side.rotateZ(180 * Math.PI / 180)
 
     active_camera = camera_side
 }

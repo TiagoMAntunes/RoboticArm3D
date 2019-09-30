@@ -47,4 +47,8 @@ class SceneObject extends THREE.Object3D {
         mesh.position.set(x, y, z)
         return mesh
     }
+
+    getPosition(){
+        return this.position
+    }
 }
