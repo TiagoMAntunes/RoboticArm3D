@@ -15,16 +15,15 @@ class RobotBase extends SceneObject {
         this.add(base)
 
         // add robot's wheels
-        let wheel1 = super.createSceneObjSphere(-6.5, -6.5, -3, radius, widthSegments, heightSegments, phiStart, phiLength, wheelMAT)
-        let wheel2 = super.createSceneObjSphere(-6.5, 6.5, -3, radius, widthSegments, heightSegments, phiStart, phiLength, wheelMAT)
-        let wheel3 = super.createSceneObjSphere(6.5, -6.5, -3, radius, widthSegments, heightSegments, phiStart, phiLength, wheelMAT)
-        let wheel4 = super.createSceneObjSphere(6.5, 6.5, -3, radius, widthSegments, heightSegments, phiStart, phiLength, wheelMAT)
+        let wheel1 = super.createSceneObjSphere(-6.5, -6.5, -3, radius, widthSegments, heightSegments, phiStart, phiLength, wheelMAT.clone())
+        let wheel2 = super.createSceneObjSphere(-6.5, 6.5, -3, radius, widthSegments, heightSegments, phiStart, phiLength, wheelMAT.clone())
+        let wheel3 = super.createSceneObjSphere(6.5, -6.5, -3, radius, widthSegments, heightSegments, phiStart, phiLength, wheelMAT.clone())
+        let wheel4 = super.createSceneObjSphere(6.5, 6.5, -3, radius, widthSegments, heightSegments, phiStart, phiLength, wheelMAT.clone())
 
         base.add(wheel1)
         base.add(wheel2)
         base.add(wheel3)
         base.add(wheel4)
-      
         // position Robot's  Base
         this.position.set(x, y, z)
     }

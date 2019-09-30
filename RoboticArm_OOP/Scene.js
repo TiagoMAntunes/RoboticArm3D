@@ -33,8 +33,6 @@ function createScene() {
 }
 
 function traverseElements(obj) {
-    console.log(obj)
-    console.log(obj instanceof THREE.Mesh)
     if (obj instanceof THREE.Mesh)
         obj.material.wireframe = !obj.material.wireframe
     if (obj !== undefined)
