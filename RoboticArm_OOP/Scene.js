@@ -56,9 +56,7 @@ function createCameras() {
     camera_top = new Camera(15, 15, 50, new THREE.Vector3(14, 15, 0))
     camera_front = new Camera(-30, 14.5, 15, new THREE.Vector3(0, 14.5, 15))
 
-    camera_front.rotateZ(90 * Math.PI / 180)
-    camera_top.rotateZ(180 * Math.PI / 180)
-    camera_side.rotateZ(180 * Math.PI / 180)
+    camera_front.rotateZ(270 * Math.PI / 180)
 
     active_camera = camera_side
 }

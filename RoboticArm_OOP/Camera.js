@@ -1,12 +1,14 @@
-class Camera extends THREE.PerspectiveCamera{
+class Camera extends THREE.OrthographicCamera{
     constructor(x, y, z, vector){
-        super((70, window.innerWidth / window.innerHeight, 1, 1000))
+        super(window.innerWidth/-2, window.innerWidth/2, window.innerHeight/2, window.innerHeight/-2, 1, 1000);
 
         this.position.set(x, y, z)
 
         this.lookAt(vector)
 
-        this.up.set(0, 0, 1);
+        this.zoom = 10
+
+        this.updateProjectionMatrix()
     }
 
     rotateX(n){
