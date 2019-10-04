@@ -15,19 +15,19 @@ class RoboticArm extends SceneObject {
 
     update() {
         if(keysMap[37]){//left arrow key
-            this.position.x -= 0.25
+            this.position.x -= 0.75
         }
     
         if(keysMap[38]){//up arrow key
-            this.position.y += 0.25;
+            this.position.y += 0.75
         }
     
         if(keysMap[39]){//right arrow key
-            this.position.x += 0.25
+            this.position.x += 0.75
         }
     
         if(keysMap[40]){//down arrow key
-            this.position.y -= 0.25
+            this.position.y -= 0.75
         }
 
         let arm = this.children[1]

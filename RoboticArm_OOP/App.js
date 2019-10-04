@@ -37,9 +37,9 @@ function onResize() {
 }
 
 function animate() {
+    requestAnimationFrame(animate)
     update()
     render()
-    requestAnimationFrame(animate)
 }
 
 //setup of scene
