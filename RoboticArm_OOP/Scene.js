@@ -41,7 +41,10 @@ function traverseElements(obj) {
   }
 
 function update() {
+    last_time = current_time
+    current_time = performance.now()
     robotic_arm.update()
+    
 
     if (wireframe) {
         traverseElements(scene);

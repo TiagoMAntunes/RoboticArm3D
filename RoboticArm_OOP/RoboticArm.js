@@ -1,3 +1,5 @@
+var last_time = undefined, current_time = undefined;
+
 class RoboticArm extends SceneObject {
     constructor(x, y, z) { 
         super()
@@ -14,20 +16,24 @@ class RoboticArm extends SceneObject {
     }
 
     update() {
+        
+        const delta_time = last_time != undefined && last_time != undefined ? (current_time - last_time) / 13 : 1;
+        
+        console.log('Delta is: ' + delta_time);
         if(keysMap[37]){//left arrow key
-            this.position.x -= 0.75
+            this.position.x -= 0.1 * delta_time
         }
     
         if(keysMap[38]){//up arrow key
-            this.position.y += 0.75
+            this.position.y += 0.1 * delta_time
         }
     
         if(keysMap[39]){//right arrow key
-            this.position.x += 0.75
+            this.position.x += 0.1 * delta_time
         }
     
         if(keysMap[40]){//down arrow key
-            this.position.y -= 0.75
+            this.position.y -= 0.1 * delta_time
         }
 
         let arm = this.children[1]
