@@ -39,7 +39,7 @@ class Arm extends SceneObject {
     }
 
     update() {
-        const delta_time = last_time != undefined && last_time != undefined ? (current_time - last_time) / 13 : 1;
+        const delta_time = last_time != undefined && current_time != undefined ? (current_time - last_time) / 13 : 1;
         let rot_obj = this.getRotationObject()
         if (keysMap[81] || keysMap[113]) { //Q or q
             rot_obj.rotation.y -= 0.015 * delta_time
