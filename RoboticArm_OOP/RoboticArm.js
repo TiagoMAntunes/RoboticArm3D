@@ -5,7 +5,7 @@ class RoboticArm extends SceneObject {
         super()
 
         // add base
-        let base = new RobotBase(x + 11.5, y + 14.5, z + 3)    
+        let base = new RobotBase(x + 11.5, y + 14.5, z + 5)    
         this.add(base)
             
         // add arm
