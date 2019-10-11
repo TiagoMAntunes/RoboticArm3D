@@ -9,7 +9,7 @@ class RoboticArm extends SceneObject {
         this.add(base)
             
         // add arm
-        let arm = new Arm(x + 11.5, y + 14.5, z + 2)
+        let arm = new Arm(x + 11.5, y + 14.5, z + 4)
         this.add(arm)
 
         this.position.set(x, y, z)
